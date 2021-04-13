@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Curriculum vitae of Rwitick Ghosh">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Halfmoon/1.1.1/css/halfmoon-variables.min.css"
+        integrity="sha512-lMs4YSTMNB+xexEzimOkuruKEzyVZl4ZOp1iqjlNQDiW0anM1/SrR6OHnAQM0WwjozjBXz63JRxORWm6OI1ZLw=="
+        crossorigin="anonymous" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="manifest" href="icons/site.webmanifest">
+    <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="msapplication-config" content="icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <title>CV</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.5/pdfobject.min.js"
+        integrity="sha512-K4UtqDEi6MR5oZo0YJieEqqsPMsrWa9rGDWMK2ygySdRQ+DtwmuBXAllehaopjKpbxrmXmeBo77vjA2ylTYhRA=="
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="page-wrapper with-navbar-fixed-bottom">
+        <div class="content-wrapper">
+            <div class="d-flex flex-column h-full">
+                <div>
+                    <h1 class="text-center"><span class="d-none d-md-inline-block">Curriculum vitae</span><span
+                            class="d-md-none">CV</span>/Résumé</h1>
+                </div>
+                <div id="cv" class="h-full"> </div>
+            </div>
+        </div>
+        <div class="navbar navbar-fixed-bottom bg-dark text-light justify-content-center">
+            <div class="navbar-content">
+
+                <p class="text-center">
+                    Download from
+                    <a href="./main.pdf" target="_blank" rel="noopener noreferrer">here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function embedPDF() {
+            if (PDFObject && PDFObject.pdfobjectversion !== null) {
+                PDFObject.embed("./main.pdf", "#cv", { fallbackLink: `<iframe src='https://drive.google.com/viewerng/viewer?embedded=true&amp;url=${window.location.origin}${window.location.pathname.split("index.html")[0]}main.pdf' type="application/pdf" height="100%" width="100%"></iframe>` });
+                clearInterval(toi);
+            }
+        }
+        const toi = setInterval(() => embedPDF(), 200);
+    </script>
+</body>
+
+</html>
