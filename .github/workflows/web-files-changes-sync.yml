@@ -27,6 +27,6 @@ jobs:
                   target_branch: gh-pages
                   build_dir: temp/
                   keep_history: true
-                  commit_message: ${{ github.event.commits[0].message }} ${{ github.sha }}
+                  commit_message: Triggered by ${{ github.sha }}
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
