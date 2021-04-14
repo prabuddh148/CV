@@ -37,8 +37,6 @@ jobs:
                   mkdir build
                   cp -r *.pdf build/
                   cp -r *.png build/
-                  cp -r web/* build/
-                  cp README.md build/
             - name: Publish to GitHub pages
               if: success() && github.ref == 'refs/heads/source'
               uses: crazy-max/ghaction-github-pages@v2.3.0

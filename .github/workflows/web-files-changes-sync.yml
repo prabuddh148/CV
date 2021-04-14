@@ -1,30 +1,32 @@
-name: Monitor web directory 
+name: Sync changes with webpage
 on:
-  push:
-    branches: [ source ]
-    paths: [ "web/**", ".github/workflows/*.yml" ]
-  workflow_dispatch:
-  
+    push:
+        branches: [source]
+        paths: ["web/**", ".github/workflows/*.yml", "*.md"]
+    workflow_dispatch:
+
 jobs:
-  sync:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Git repository for source branch
-        uses: actions/checkout@v2
-      - name: Checkout gh-pages branch
-        uses: actions/checkout@v2
-        with:
-          ref: gh-pages
-          path: temp
-      - name: Move web files to temp directory
-        run: cp -r web/* temp/
-      - name: Publish to GitHub pages (Web files update)
-        if: success() && github.ref == 'refs/heads/source'
-        uses: crazy-max/ghaction-github-pages@v2.3.0
-        with:
-            target_branch: gh-pages
-            build_dir: temp/
-            keep_history: true
-            commit_message: Update web files ${{ github.sha }}
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    sync:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Set up Git repository for source branch
+              uses: actions/checkout@v2
+            - name: Checkout gh-pages branch
+              uses: actions/checkout@v2
+              with:
+                  ref: gh-pages
+                  path: temp
+            - name: Move web files to temp directory
+              run: |
+                  cp -r web/* temp/
+                  cp -r *.md temp/
+            - name: Publish to GitHub pages (Web files update)
+              if: success() && github.ref == 'refs/heads/source'
+              uses: crazy-max/ghaction-github-pages@v2.3.0
+              with:
+                  target_branch: gh-pages
+                  build_dir: temp/
+                  keep_history: true
+                  commit_message: ${{ github.event.commits[0].message }} ${{ github.sha }}
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
