@@ -3,6 +3,8 @@ on:
     push:
         branches:
             - source
+        paths:
+            - "*.tex"
     workflow_dispatch:
 jobs:
     build_latex:
@@ -16,13 +18,27 @@ jobs:
                   root_file: main.tex
                   compiler: lualatex
                   args: -interaction=nonstopmode -shell-escape
+            - name: Create PNG from PDFd
+              uses: jruipinto/ImageMagick-action@v1
+              with:
+                  command: mogrify -verbose -density 500 -resize 800 -opaque white -format png ./*.pdf
+            - name: Create image for readme
+              uses: jruipinto/ImageMagick-action@v1
+              with:
+                  command: convert main.png -background white -alpha remove -alpha off demo.png
+            - name: Add & Commit demo.png
+              uses: EndBug/add-and-commit@v7.1.1
+              with:
+                  add: demo.png
+                  message: Update demo.png
+                  signoff: true
             - name: Gather build artifacts
               run: |
                   mkdir build
                   mv *.pdf build/
+                  mv *.png build/
                   mv web/* build/
                   mv README.md build/
-
             - name: Publish to GitHub pages
               if: success() && github.ref == 'refs/heads/source'
               uses: crazy-max/ghaction-github-pages@v1
