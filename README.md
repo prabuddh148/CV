@@ -8,4 +8,4 @@ View [here](https://humble-barnacle001.github.io/CV)
 
 ## Document preview
 
-[![CV](./demo.png)](https://humble-barnacle001.github.io/CV/main.png)
+[![CV](./demo.png)](https://humble-barnacle001.github.io/CV/main.pdf)
