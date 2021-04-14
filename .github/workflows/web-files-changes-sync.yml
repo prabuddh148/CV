@@ -1,0 +1,19 @@
+name: Monitor web directory 
+on:
+  push:
+    branches: [ source ]
+    paths: "web/**"
+  workflow_dispatch:
+  
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Add & Commit changes to web directory
+        uses: EndBug/add-and-commit@v7.1.1
+        with:
+          add: web/*
+          branch: gh-pages
+          message: Update web files

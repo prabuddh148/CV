@@ -18,7 +18,7 @@ jobs:
                   root_file: main.tex
                   compiler: lualatex
                   args: -interaction=nonstopmode -shell-escape
-            - name: Create PNG from PDFd
+            - name: Create PNG from PDFs
               uses: jruipinto/ImageMagick-action@v1
               with:
                   command: mogrify -verbose -density 500 -resize 800 -opaque white -format png ./*.pdf
