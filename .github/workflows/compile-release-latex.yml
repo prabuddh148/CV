@@ -35,15 +35,17 @@ jobs:
             - name: Gather build artifacts
               run: |
                   mkdir build
-                  mv *.pdf build/
-                  mv *.png build/
-                  mv web/* build/
-                  mv README.md build/
+                  cp -r *.pdf build/
+                  cp -r *.png build/
+                  cp -r web/* build/
+                  cp README.md build/
             - name: Publish to GitHub pages
               if: success() && github.ref == 'refs/heads/source'
-              uses: crazy-max/ghaction-github-pages@v1
+              uses: crazy-max/ghaction-github-pages@v2.3.0
               with:
                   target_branch: gh-pages
                   build_dir: build/
+                  keep_history: true
+                  commit_message: Deploy to GitHub pages ${{ github.sha }}
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
